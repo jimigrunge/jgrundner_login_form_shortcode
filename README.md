@@ -30,68 +30,68 @@ This shortcode uses all of the existing arguments for wp_login_form:
 
 
 * __label_username__
-  - Default: '_Username_'
+    - Default: '_Username_'
 
 
 * __label_password__
-  - Default: '_Password_'
+    - Default: '_Password_'
 
 
 * __label_remember__
-  - Default: '_Remember Me_'
+    - Default: '_Remember Me_'
 
 
 * __label_log_in__
-  - Default: '_Log In_'
+    - Default: '_Log In_'
 
 
 * __id_username__
-  - Default: '_user_login_'
+    - Default: '_user_login_'
 
 
 * __id_password__
-  - Default: '_user_pass_'
+    - Default: '_user_pass_'
 
 
 * __id_remember__
-  - Default: '_rememberme_'
+    - Default: '_rememberme_'
 
 
 * __id_submit__
-  - Default: '_wp-submit_'
+    - Default: '_wp-submit_'
 
 
 * __remember__
-  - Default: TRUE
+    - Default: TRUE
 
 
 * __value_username__
-  - Default: NULL
+    - Default: NULL
 
 
 * __value_remember__
-  - Default: FALSE
+    - Default: FALSE
 
 It also add some extra functionality:
 * __logged_in_msg__ - Message to display if the user is already logged in
-  - Default: '_You are already logged in!_'
+    - Default: '_You are already logged in!_'
 
 
 * __login_form_top__ - This is text that goes above the form
-  - Default: '_Login_'
+    - Default: '_Login_'
 
 
 * __login_form_top_tag__ - This is the HTML tag that wraps the _login_form_top_
-  - Default: _`h2`_
-  - Ex: _h3_
+    - Default: _`h2`_
+    - Ex: _h3_
 
 
 * __login_form_middle__ - This is text that goes between 'password' and 'remember_me'
-  - Default: ''
+    - Default: ''
 
 
 * __login_form_bottom__ - This is text that goes below the 'submit' button
-  - Default: ''
+    - Default: ''
 
 
 ## Logout ##
@@ -100,19 +100,19 @@ It also add some extra functionality:
 This shortcode talkes the following arguments:
 
 * __id__ - id attribute for the `<a>` tag
-  - Default: ''
+    - Default: ''
 
 
 * __class__ - class attribute for the `<a>` tag
-  - Default: ''
+    - Default: ''
 
 
 * __style__ - style attribute for the `<a>` tag
-  - Default: ''
+    - Default: ''
 
 
 * __text__ - Text to put inside of the `<a>` tag
-  - Default: ''
+    - Default: ''
 
 
 ## Installation ##
