@@ -22,11 +22,11 @@ This shortcode uses all of the existing arguments for wp_login_form:
 
 
 * __redirect__ - Page to redirect to after login.
-  - Default: current page. `$_REQUEST['redirect_to']` | `$_SERVER['REQUEST_URI']`
+    - Default: current page. `$_REQUEST['redirect_to']` | `$_SERVER['REQUEST_URI']`
 
 
 * __form_id__
-  - Default: '_loginform_'
+    - Default: '_loginform_'
 
 
 * __label_username__
