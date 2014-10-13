@@ -125,9 +125,9 @@ This section describes how to install the plugin and get it working.
 
 ## Frequently Asked Questions ##
 
-### A question that someone might have ###
+### Why isn't there any questions ###
 
-An answer to that question.
+No one has asked any yet.
 
 ## Changelog ##
 
