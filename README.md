@@ -93,6 +93,14 @@ It also add some extra functionality:
 * __login_form_bottom__ - This is text that goes below the 'submit' button
     - Default: ''
 
+* __form_top_class__ - Class to add to the `<span>` tag that wraps element
+    - Default: ''
+
+* __form_middle_class__ - Class to add to the `<span>` tag that wraps element
+    - Default: ''
+
+* __form_bottom_class__ - Class to add to the `<span>` tag that wraps element
+    - Default: ''
 
 ## Logout ##
 `[jcg-logout]`
@@ -114,6 +122,9 @@ This shortcode talkes the following arguments:
 * __text__ - Text to put inside of the `<a>` tag
     - Default: ''
 
+* __xattr__ - Extra attributes for the `<a>` tag. 
+    - Default: ''
+    - Useful for mobile/responsive attributes.
 
 ## Installation ##
 

@@ -28,6 +28,8 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+define( 'JCG_LOGIN_FORM_ANYWHERE_VERSION', '1.0' );
+
 class JCG_Login_Form_Anywhere
 {
     /**
@@ -48,30 +50,29 @@ class JCG_Login_Form_Anywhere
      */
     function jcg_login_form_shortcode($atts)
     {
-
-        // Original Attributes, for filters
-        $original_atts = $atts;
-
         // Pull in shortcode attributes and set defaults
         $atts = shortcode_atts(array(
-            'echo'              => FALSE,/* Set 'echo' to 'false' because we want it to always return instead of print for shortcodes. */
-            'redirect'          => site_url($_SERVER['REQUEST_URI']),
-            'form_id'           => 'loginform',
-            'label_username'    => __('Username'),
-            'label_password'    => __('Password'),
-            'label_remember'    => __('Password'),
-            'label_log_in'      => 'Log In',
-            'id_username'       => 'user_login',
-            'id_password'       => 'user_pass',
-            'id_remember'       => 'rememberme',
-            'id_submit'         => 'wp-submit',
-            'remember'          => TRUE,
-            'value_username'    => NULL,
-            'value_remember'    => FALSE,
-            'logged_in_msg'     => '',
-            'login_form_top'    => 'Login',
-            'login_form_middle' => '',
-            'login_form_bottom' => ''
+            'echo'                => FALSE,/* Set 'echo' to 'false' because we want it to always return instead of print for shortcodes. */
+            'redirect'            => site_url($_SERVER['REQUEST_URI']),
+            'form_id'             => 'loginform',
+            'label_username'      => __('Username'),
+            'label_password'      => __('Password'),
+            'label_remember'      => __('Password'),
+            'label_log_in'        => 'Log In',
+            'id_username'         => 'user_login',
+            'id_password'         => 'user_pass',
+            'id_remember'         => 'rememberme',
+            'id_submit'           => 'wp-submit',
+            'remember'            => TRUE,
+            'value_username'      => NULL,
+            'value_remember'      => FALSE,
+            'logged_in_msg'       => '',
+            'login_form_top'      => 'Login',
+            'login_form_middle'   => '',
+            'login_form_bottom'   => '',
+            'form_top_class'      => '',
+            'form_middle_class'   => '',
+            'form_bottom_class'   => ''
         ), $atts);
 
         if (is_user_logged_in()) {
@@ -86,21 +87,19 @@ class JCG_Login_Form_Anywhere
         add_filter('login_form_top', 'jcg_login_form_top', 10, 2);
         function jcg_login_form_top($top, $atts)
         {
-            $top = '<h2>' . $atts['login_form_top'] . '</h2>';
-
-            return $top;
+            return '<span class="'.$atts['form_top_class'].'">' . $atts['login_form_top'] . '</span>';
         }
 
         add_filter('login_form_middle', 'jcg_login_form_middle', 10, 2);
         function jcg_login_form_middle($middle, $atts)
         {
-            return $atts['login_form_middle'];
+            return '<span class="'.$atts['form_middle_class'].'">' . $atts['login_form_middle'] . '</span>';
         }
 
         add_filter('login_form_bottom', 'jcg_login_form_bottom', 10, 2);
         function jcg_login_form_bottom($bottom, $atts)
         {
-            return $atts['login_form_bottom'];
+            return '<span class="'.$atts['form_bottom_class'].'">' . $atts['login_form_bottom'] . '</span>';
         }
 
         return wp_login_form($atts);
@@ -133,7 +132,7 @@ class JCG_Login_Form_Anywhere
         $text    = ( $text != ''  ) ? esc_attr($text)                    : 'Logout';
         $xattr   = ( $xattr != '' ) ? esc_attr($xattr)                   : '';
 
-        $output = '<a  href="' . wp_logout_url(home_url()) . '" title="Logout" id="' . $id . '" class="' . $class . '" ' . $style . ' '.$xattr.'>' . $text . '</a>';
+        $output = '<a href="'.wp_logout_url(home_url()).'" title="Logout" id="'.$id.'" class="'.$class.'" '.$style.' '.$xattr.'>'.$text.'</a>';
 
         return $output;
     }
