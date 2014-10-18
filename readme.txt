@@ -93,6 +93,15 @@ It also add some extra functionality:
 * __login_form_bottom__ - This is text that goes below the 'submit' button
     - Default: ''
 
+* __form_top_class__ - Class to add to the `<span>` tag that wraps element
+    - Default: ''
+
+* __form_middle_class__ - Class to add to the `<span>` tag that wraps element
+    - Default: ''
+
+* __form_bottom_class__ - Class to add to the `<span>` tag that wraps element
+    - Default: ''
+
 == Logout ==
 `[jcg-logout]`
 
