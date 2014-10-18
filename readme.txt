@@ -122,6 +122,9 @@ This shortcode talkes the following arguments:
 * __text__ - Text to put inside of the `<a>` tag
     - Default: ''
 
+* __xattr__ - Extra attributes for the `<a>` tag.
+    - Default: ''
+    - Useful for mobile/responsive attributes.
 
 == Installation ==
 
