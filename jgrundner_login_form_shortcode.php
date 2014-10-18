@@ -35,10 +35,22 @@ class JCG_Login_Form_Anywhere
     /**
      * Constructor
      */
-    function __construct() {
+    function __construct()
+    {
         add_shortcode('jcg-login-form', array($this,'jcg_login_form_shortcode'));
         add_shortcode('jcg-logout', array($this,'jcg_logout_shortcode'));
+        register_activation_hook( __FILE__, array($this,'jcg_set_default_options') );
+
     }
+
+    function jcg_set_default_options()
+    {
+        if ( get_option( 'jcg_login_form_anywhere_version' ) === false )
+        {
+            add_option( 'jcg_login_form_anywhere_version', '1.0' );
+        }
+    }
+
     /**
      * Add a login form anywhere you can put a shortcode
      *
@@ -75,12 +87,14 @@ class JCG_Login_Form_Anywhere
             'form_bottom_class'   => ''
         ), $atts);
 
-        if (is_user_logged_in()) {
+        if (is_user_logged_in())
+        {
             return $atts['logged_in_msg'];
         }
 
         /* Set the sredirect page based on redirect_to query parameter if set */
-        if (!empty($_REQUEST['redirect_to'])) {
+        if (!empty($_REQUEST['redirect_to']))
+        {
             $atts['redirect'] = site_url($_REQUEST['redirect_to']);
         }
 
@@ -136,7 +150,6 @@ class JCG_Login_Form_Anywhere
 
         return $output;
     }
-
 }
 
 $jcg_login_form_anywhere = new JCG_Login_Form_Anywhere();
