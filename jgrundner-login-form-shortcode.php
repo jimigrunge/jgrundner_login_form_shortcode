@@ -32,6 +32,7 @@ define( 'JCG_LOGIN_FORM_ANYWHERE_VERSION', '1.0' );
 
 class JCG_Login_Form_Anywhere
 {
+    const JCG_LOGIN_FORM_ANYWHERE_VERSION = JCG_LOGIN_FORM_ANYWHERE_VERSION;
     /**
      * Constructor
      */
@@ -39,15 +40,19 @@ class JCG_Login_Form_Anywhere
     {
         add_shortcode('jcg-login-form', array($this,'jcg_login_form_shortcode'));
         add_shortcode('jcg-logout', array($this,'jcg_logout_shortcode'));
+        add_action( 'admin_init', array( $this, 'action_admin_init' ) );
         register_activation_hook( __FILE__, array($this,'jcg_set_default_options') );
 
     }
 
+    /**
+     * Set default options
+     */
     function jcg_set_default_options()
     {
         if ( get_option( 'jcg_login_form_anywhere_version' ) === false )
         {
-            add_option( 'jcg_login_form_anywhere_version', '1.0' );
+            add_option( 'jcg_login_form_anywhere_version', JCG_LOGIN_FORM_ANYWHERE_VERSION );
         }
     }
 
@@ -89,7 +94,7 @@ class JCG_Login_Form_Anywhere
 
         if (is_user_logged_in())
         {
-            return $atts['logged_in_msg'];
+            //return $atts['logged_in_msg'];
         }
 
         /* Set the sredirect page based on redirect_to query parameter if set */
@@ -149,6 +154,27 @@ class JCG_Login_Form_Anywhere
         $output = '<a href="'.wp_logout_url(home_url()).'" title="Logout" id="'.$id.'" class="'.$class.'" '.$style.' '.$xattr.'>'.$text.'</a>';
 
         return $output;
+    }
+
+    function action_admin_init() {
+        // only hook up these filters if we're in the admin panel, and the current user has permission
+        // to edit posts and pages
+        if ( current_user_can( 'edit_posts' ) && current_user_can( 'edit_pages' ) ) {
+            add_filter( 'mce_buttons', array( $this, 'filter_mce_button' ) );
+            add_filter( 'mce_external_plugins', array( $this, 'filter_mce_plugin' ) );
+        }
+    }
+
+    function filter_mce_button( $buttons ) {
+        // add a separation before our button, here our button's id is &quot;mygallery_button&quot;
+        array_push( $buttons, '|', 'mygallery_button' );
+        return $buttons;
+    }
+
+    function filter_mce_plugin( $plugins ) {
+        // this plugin file will work the magic of our button
+        $plugins['mygallery'] = plugin_dir_url( __FILE__ ) . 'js/jcg-login-form-plugin.js';
+        return $plugins;
     }
 }
 
