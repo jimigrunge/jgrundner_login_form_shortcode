@@ -9,7 +9,7 @@ class UNINSTALL_JCG_Login_Form_Anywhere
      */
     function __construct()
     {
-        $this->uninstall_jcg_login_form_anywhere();
+        //$this->uninstall_jcg_login_form_anywhere();
     }
 
     /**
