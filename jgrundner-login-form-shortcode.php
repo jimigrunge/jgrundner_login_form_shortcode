@@ -40,7 +40,8 @@ class JCG_Login_Form_Anywhere
     {
         add_shortcode('jcg-login-form', array($this,'jcg_login_form_shortcode'));
         add_shortcode('jcg-logout', array($this,'jcg_logout_shortcode'));
-        add_action( 'admin_init', array( $this, 'action_admin_init' ) );
+        //add_action( 'admin_init', array( $this, 'action_admin_init' ) );
+        add_action('admin_head', array( $this, 'action_admin_init' ));
         register_activation_hook( __FILE__, array($this,'jcg_set_default_options') );
 
     }
@@ -74,7 +75,7 @@ class JCG_Login_Form_Anywhere
             'form_id'             => 'loginform',
             'label_username'      => __('Username'),
             'label_password'      => __('Password'),
-            'label_remember'      => __('Password'),
+            'label_remember'      => __('Remember Me'),
             'label_log_in'        => 'Log In',
             'id_username'         => 'user_login',
             'id_password'         => 'user_pass',
@@ -156,25 +157,44 @@ class JCG_Login_Form_Anywhere
         return $output;
     }
 
+    /**
+     * Init the admin button function
+     */
     function action_admin_init() {
-        // only hook up these filters if we're in the admin panel, and the current user has permission
-        // to edit posts and pages
+        // Only hook up these filters if we're in the admin panel,
+        // and the current user has permission to edit posts and pages
         if ( current_user_can( 'edit_posts' ) && current_user_can( 'edit_pages' ) ) {
-            add_filter( 'mce_buttons', array( $this, 'filter_mce_button' ) );
-            add_filter( 'mce_external_plugins', array( $this, 'filter_mce_plugin' ) );
+            // Is the MCE editor being used?
+            if ( 'true' == get_user_option( 'rich_editing' ) ) {
+                add_filter( 'mce_external_plugins', array($this, 'jcg_add_tinymce_plugin') );
+                add_filter( 'mce_buttons_2', array($this, 'jcg_register_mce_button') );
+            }
         }
     }
 
-    function filter_mce_button( $buttons ) {
-        // add a separation before our button, here our button's id is &quot;mygallery_button&quot;
-        array_push( $buttons, '|', 'mygallery_button' );
-        return $buttons;
+    /**
+     * Declare script for new button
+     *
+     * @param $plugin_array
+     *
+     * @return mixed
+     */
+    function jcg_add_tinymce_plugin( $plugin_array ) {
+        $plugin_array['jcg_mce_button'] = plugin_dir_url( __FILE__ ) .'js/jcg-login-form-plugin.js';
+        wp_enqueue_style( 'custom_tinymce_plugin', plugins_url( 'css/jcg-login-form-plugin.css', __FILE__ ) );
+        return $plugin_array;
     }
 
-    function filter_mce_plugin( $plugins ) {
-        // this plugin file will work the magic of our button
-        $plugins['mygallery'] = plugin_dir_url( __FILE__ ) . 'js/jcg-login-form-plugin.js';
-        return $plugins;
+    /**
+     * Register new button in the editor
+     *
+     * @param $buttons
+     *
+     * @return mixed
+     */
+    function jcg_register_mce_button( $buttons ) {
+        array_push( $buttons, 'jcg_mce_button' );
+        return $buttons;
     }
 }
 
