@@ -1,6 +1,7 @@
 # jGrundner WP Login Form #
-* Requires at least: 3.0.1
+* Requires at least: WordPress 3.9 and TinyMCE 4
 * Tested up to: 4.0
+* Not tested with versions lower than 3.9... Your mileage may very.
 * Stable tag: trunk
 * License: GPLv2
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -130,9 +131,15 @@ This shortcode talkes the following arguments:
 
 This section describes how to install the plugin and get it working.
 
-1. Upload `jgrundner_login_form_shortcode.php` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Place `jcg-login-form` or  shortcode anywhere that accepts them
+1. Upload: Unzip `jgrundner_login_form_shortcode.zip` file, and upload the `jgrundner_login_form_shortcode` folder to your WordPress installation's `/wp-content/plugins/` directory
+
+2. Activate: In the admin panel, goto `Plugins -> Installed Plugins`, active **'JCG Login Form Anywhere'**.
+
+3. Use it two ways: 
+
+    A. You will see a new button in the TinyMCE Editor in post and pages, use this button to add a login form.
+    
+    B. Or: Place `[jcg-login-form]` shortcode anywhere that accepts shortcodes.
 
 ## Frequently Asked Questions ##
 
@@ -141,6 +148,13 @@ This section describes how to install the plugin and get it working.
 No one has asked any yet.
 
 ## Changelog ##
+
+### 1.2 ###
+* Add TinyMCE button for login form
+
+### 1.1 ###
+* Objectify code
+* Add uninstaller
 
 ### 1.0 ###
 * This is the initial version of the plugin.
